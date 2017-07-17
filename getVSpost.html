@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script charset="utf-8" type="text/javascript" src="js/ajax.js">
+		var xhr = createXHR();
+		//使用get请求给服务器传递内容我们一般使用URL传参的方式
+		xhr.open("get",'/getList?num=12',true);
+
+
+		//->HTTP METHOD:客户端向服务器发送请求的方式
+		//以下的请求方式不管哪一种都可以向服务器传递数据，也可以从服务器获取到数据。以下是约定俗成的规范：
+		//
+		//GET:一般应用于从服务器获取数据（给服务器的数据少，从服务器拿的数据多，项目中最常用的请求就是GET）
+		//
+		//POST:一般用于给服务器推送数据（给服务器的多，从服务器拿下来的少）
+		//使用post请求给服务器传递内容我们一般都使用“请求主体的方式”传递给服务器
+		//xhr.open("post",'/getList?);
+		//xhr.send('{"name":"zhufeng","age":7}');
+		//
+		//1.get & post 
+		//“大小问题”
+		//get请求传递给服务器的内容存在大小限制，而post理论上没有限制
+		//原因：get通过url传参给服务器，url长度有限制，谷歌8kb,火狐7kb,IE2kb的长度限制，超出部分截取
+		//
+		//“缓存问题”
+		//GET请求会出现缓存（这个缓存不一定是304）post是没有缓存的
+		//在项目中我们的get请求不会让其产生缓存，“清除缓存”
+		xhr.open("get","/getList?num=12&_="+Math.random());
+		//
+		//“安全问题”
+		//get不安全 post相对安全一些
+		//
+		//
+		//
+		//
+		//PUT:一般应用与给服务器上增加资源文件（上传图片功能）
+		//
+		//DELETE:一般用于从服务器上删除资源文件
+		//
+		//HEAD:一般用于只获取服务器的响应头信息
+		//
+		//...
+	</script>
+</body>
+</html>

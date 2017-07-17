@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+			
+
+
+
+	//->创建一个AJAX对象（这种写法在IE6以下不支持）
+	var xhr =new XMLHttpRequest();
+
+	//->发送前的基本信息配置：请求方法(GET,POST,PUT,DELETE,HEAD...)  URL地址  是否异步?(默认true)  [username] [userpass]
+	xhr.open("get","/data.txt",false);
+	//->给onreadystatechange这个事件绑定一个方法，监听状态的改变
+	xhr.onreadystatechange=function(){
+		//xhr.readyState: 请求状态码，代表当前AJAX处理的进度
+		//0 unset请求还未发送
+		//1 opened URL地址已经打开(配置信息完成)
+		//2 HEADER_RECEIVED 响应头信息已经接收
+		//3 LOADING  返回的内容在服务器端进行准备处理
+		//4 DONE 响应主体的内容已成功返回到客户端
+		//
+		//xhr.status :HTTP网络状态码 描述了服务器响应内容的状态
+		//200 OR 以2开头的 都代表响应主体的内容已经成功返回了
+		//301 ->永久重定向/永久转移
+		//302 ->临时重定向/临时转移 服务器的负载均衡
+		//304 ->本次获取的内容是读取缓存中的数据
+		//
+		//400 ->客户端传递给服务器端的参数出现错误
+		//401 ->无权限访问
+		//404 ->客户端访问的地址不存在
+		//
+		//500 ->未知的服务器错误
+		//503 ->服务器已经超负荷 如果没有做服务器的负载均衡 那么状态码就是503
+		//
+		//
+		if(xhr.readyState==4 && /^2\d{2}$/.test(xhr.status)){
+			var val = xhr.responseText;
+		}
+	};
+
+	//发送请求：参数是请求主体中传递给服务器的内容
+	xhr.send();
+	</script>
+</body>
+</html>
